@@ -7,11 +7,23 @@ var router = require('express').Router();
 
 
 router.post('/days', function (req, res, next) {
-  
+
   Day.create(req.body).then(function(data){
     console.log(data);
-    res.send('hello');
+    res.send(data);
   }).catch(next);
+
+
+
+});
+
+router.get('/days', function (req, res, next) {
+  Day.findAll({})
+  .then(function (days) {
+    console.log(days);
+    res.json(days);
+  })
+  .catch(next);
 });
 
 
@@ -23,7 +35,7 @@ router.post('/days', function (req, res, next) {
 //   Day.findOne(
 //     {
 //       where:{
-//        id: req.params.id 
+//        id: req.params.id
 //       },
 //       include: [ Hotel ]
 //     }

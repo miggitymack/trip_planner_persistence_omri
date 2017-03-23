@@ -16,7 +16,8 @@ var dataModule = (function () {
     activitiesPromise: $.ajax({
       method: 'GET',
       url: '/api/activities'
-    })
+    }),
+
 
   };
 

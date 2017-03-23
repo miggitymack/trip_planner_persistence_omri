@@ -27,17 +27,19 @@ var dayModule = (function () {
 
   function Day (data) {
     // for brand-new days
-    this.number = 0;
-    this.hotel = null;
-    this.restaurants = [];
-    this.activities = [];
-    // for days based on existing data
-    utilsModule.merge(data, this);
-    if (this.hotel) this.hotel = attractionsModule.getEnhanced(this.hotel);
-    this.restaurants = this.restaurants.map(attractionsModule.getEnhanced);
-    this.activities = this.activities.map(attractionsModule.getEnhanced);
-    // remainder of constructor
+    this.number = data.id;
+    // this.hotel = null;
+    // this.restaurants = [];
+    // this.activities = [];
+    // // for days based on existing data
+    // utilsModule.merge(data, this);
+    // if (this.hotel) this.hotel = attractionsModule.getEnhanced(this.hotel);
+    // this.restaurants = this.restaurants.map(attractionsModule.getEnhanced);
+    // this.activities = this.activities.map(attractionsModule.getEnhanced);
+    // // remainder of constructor
+
     this.buildButton().showButton();
+
   }
 
   // automatic day button handling
@@ -129,12 +131,36 @@ var dayModule = (function () {
     attraction.hide();
   };
 
+  Day.prototype.getDays = function (days) {
+    $.ajax({
+      method: 'GET',
+      url: '/api/days/'
+    })
+    .then(function (days) {
+      return days;
+    })
+    .catch(next);
+
+  };
+
+
   // globally accessible module methods
 
   var publicAPI = {
 
     create: function (databaseDay) {
       return new Day(databaseDay);
+    },
+    getDays: function () {
+      console.log('hello');
+      // $.ajax({
+      //   method: 'GET',
+      //   url: '/api/days/'
+      // })
+      // .then(function (days) {
+      //   console.log(days);
+      //   return days;
+      // });
     }
 
   };
