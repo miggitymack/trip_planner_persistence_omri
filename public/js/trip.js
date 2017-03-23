@@ -52,6 +52,16 @@ var tripModule = (function () {
     if (days.length === 1) {
       currentDay = newDay;
     }
+
+    $.ajax({
+      method:'POST',
+      url: '/api/days/',
+      data: {
+        number: days[days.length - 1].number 
+      }
+    })
+
+
     switchTo(newDay);
   }
 

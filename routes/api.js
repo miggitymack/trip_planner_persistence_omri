@@ -6,31 +6,59 @@ var Day = require('../models/day')
 var router = require('express').Router();
 
 
-
-
-router.get('/api/days/:id/hotels', function (req, res, next) {
-  Hotel.findAll()
-  .then(function (allHotels) {
-    res.json(allHotels)
-  })
-  .catch(next);
+router.post('/days', function (req, res, next) {
+  
+  Day.create(req.body).then(function(data){
+    console.log(data);
+    res.send('hello');
+  }).catch(next);
 });
 
-router.get('/api/days/:id/restaurants', function (req, res, next) {
-  Restaurant.findAll()
-  .then(function (allRestaurants) {
-    res.json(allRestaurants)
-  })
-  .catch(next);
-});
 
-router.get('/api/days/:id/activities', function (req, res, next) {
-  Activity.findAll()
-  .then(function (allActivities) {
-    res.json(allActivities)
-  })
-  .catch(next);
-});
+
+
+
+
+// router.get('/api/days/:id/hotels', function (req, res, next) {
+//   Day.findOne(
+//     {
+//       where:{
+//        id: req.params.id 
+//       },
+//       include: [ Hotel ]
+//     }
+//   )
+//   .then(function (allHotels) {
+//     res.json(allHotels)
+//   })
+//   .catch(next);
+// });
+
+
+// router.get('/api/days/:id/hotels', function (req, res, next) {
+//   Hotel.findAll(
+//   )
+//   .then(function (allHotels) {
+//     res.json(allHotels)
+//   })
+//   .catch(next);
+// });
+
+// router.get('/api/days/:id/restaurants', function (req, res, next) {
+//   Restaurant.findAll()
+//   .then(function (allRestaurants) {
+//     res.json(allRestaurants)
+//   })
+//   .catch(next);
+// });
+
+// router.get('/api/days/:id/activities', function (req, res, next) {
+//   Activity.findAll()
+//   .then(function (allActivities) {
+//     res.json(allActivities)
+//   })
+//   .catch(next);
+// });
 
 
 
